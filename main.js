@@ -1,100 +1,81 @@
-// console.log();
-
-let playGame = confirm('Do you want to play Rock, Paper Scissors?');
-function rockPaperScissors(){
-    if (playGame) {
-        let playerChoice = prompt("Rock, Paper, Scissors? ");
-        if (playerChoice) {
-            let playerOne = playerChoice.trim().toLowerCase();
-            if (
-                playerOne === "rock" ||
-                playerOne === "paper" ||
-                playerOne === "scissors"
-            ) {
-                console.log("Rock, Paper, Scissors")
-                let computerChoice = Math.floor(Math.random() * 3) + 1;
-                let computer = computerChoice === 1 ? "rock" : computerChoice === 2 ? "scissors" : "paper";
-                let result =
-                    playerOne === computer
-                        ? "Game Tie"
-                        : playerOne === "rock" && computer === "scissors"
-                            ? `PlayerOne: ${playerOne}, computer: ${computer}, \nPlayer wins!`
-                            : playerOne === "scissors" && computer === "paper"
-                                ? `PlayerOne: ${playerOne}, computer: ${computer}, \nComputer wins!`
-                                : playerOne === "paper" && computer === "rock"
-                                    ? `PlayerOne: ${playerOne}, computer: ${computer}, \nPlayer wins!`
-                                    : `PlayerOne: ${playerOne}, computer: ${computer}, \nComputer wins!`
-                alert(result);
-                let playAgain = confirm('Play Again?');
-                playAgain ? location.reload(rockPaperScissors()) : alert("Thank you for playing :)")
-            } else{
-                alert("Please enter a valid prompt");
-            }
-        } else {
-            alert("I guess you changed your mind :(")
-        }
+function getPlayerChoice() {
+    let playerChoice = document.querySelectorAll('#items button');
+    if (playerChoice) {
+        playerChoice.forEach(function(choice){
+            choice.addEventListener('click', function(){
+                let result = document.querySelector('#result');
+                // result.textContent = userChoice;
+                let userChoice = choice.id;
+                if ( 
+                    userChoice === 'rock' ||
+                    userChoice === 'paper' ||
+                    userChoice === 'scissors'
+                  ) {
+                    console.log(userChoice)
+                    return userChoice
+                } else {
+                    alert("Please enter a valid prompt");
+                    return getPlayerChoice();
+                }
+            });
+        });
     } else {
-        alert("Maybe next time.")
+      alert("I guess you changed your mind :(");
+      return null;
     }
+  }
+  
+  function getComputerChoice() {
+    let computerChoice = Math.floor(Math.random() * 3) + 1;
+    return computerChoice === 1 ? "rock" : computerChoice === 2 ? "scissors" : "paper";
+  }
+  
+  function getGameResult(userChoice, computer) {
+    if (userChoice === computer) {
+      return "Game Tie";
+    } else if (
+      (userChoice === "rock" && computer === "scissors") ||
+      (userChoice === "scissors" && computer === "paper") ||
+      (userChoice === "paper" && computer === "rock")
+    ) {
+        let result = document.querySelector('#result');
+        result.textContent = `PlayerOne: ${userChoice}, computer: ${computer}, \nPlayer wins!`;
+
+    } else {
+      return `PlayerOne: ${userChoice}, computer: ${computer}, \nComputer wins!`;
+    }
+  }
+  
+  function playGame() {
+    if (playGame) {
+      let playerOne = getPlayerChoice();
+      if (playerOne) {
+        let computer = getComputerChoice();
+        let result = getGameResult(userChoice, computer);
+        alert(result);
+        let playAgain = confirm('Play Again?');
+        playAgain ? location.reload() : alert("Thank you for playing :)");
+      }
+    } else {
+      alert("Maybe next time.");
+    }
+  }
+
+function gameScore(){
+    let playerScore = document.createElement('int');
+    let compScore = document.createElement('p');
+    playerScore.setAttribute('id', 'player-score')
+    compScore.setAttribute('id', 'comp-score')
+    let scoreBoard = [];
+    scoreBoard[0] = document.createTextNode("Player: ");
+    scoreBoard.push(playerScore);
+    scoreBoard[1] = document.createTextNode(" Computer: ");
+    scoreBoard.push(compScore);
+    scoreBoard.appendChild(playerScore);
+    scoreBoard.appendChild(compScore);
+    
 };
-
-
-rockPaperScissors();
-
-// function getPlayerChoice() {
-//     let playerChoice = prompt("Rock, Paper, Scissors? ");
-//     if (playerChoice) {
-//       let playerOne = playerChoice.trim().toLowerCase();
-//       if (
-//         playerOne === "rock" ||
-//         playerOne === "paper" ||
-//         playerOne === "scissors"
-//       ) {
-//         return playerOne;
-//       } else {
-//         alert("Please enter a valid prompt");
-//         return getPlayerChoice();
-//       }
-//     } else {
-//       alert("I guess you changed your mind :(");
-//       return null;
-//     }
-//   }
   
-//   function getComputerChoice() {
-//     let computerChoice = Math.floor(Math.random() * 3) + 1;
-//     return computerChoice === 1 ? "rock" : computerChoice === 2 ? "scissors" : "paper";
-//   }
-  
-//   function getGameResult(playerOne, computer) {
-//     if (playerOne === computer) {
-//       return "Game Tie";
-//     } else if (
-//       (playerOne === "rock" && computer === "scissors") ||
-//       (playerOne === "scissors" && computer === "paper") ||
-//       (playerOne === "paper" && computer === "rock")
-//     ) {
-//       return `PlayerOne: ${playerOne}, computer: ${computer}, \nPlayer wins!`;
-//     } else {
-//       return `PlayerOne: ${playerOne}, computer: ${computer}, \nComputer wins!`;
-//     }
-//   }
-  
-//   function playGame() {
-//     if (playGame) {
-//       let playerOne = getPlayerChoice();
-//       if (playerOne) {
-//         let computer = getComputerChoice();
-//         let result = getGameResult(playerOne, computer);
-//         alert(result);
-//         let playAgain = confirm('Play Again?');
-//         playAgain ? location.reload() : alert("Thank you for playing :)");
-//       }
-//     } else {
-//       alert("Maybe next time.");
-//     }
-//   }
-  
-//   let playGame = confirm('Do you want to play Rock, Paper Scissors?');
-//   playGame ? playGame() : alert("Thank you for playing :)");
+  let playRPS = confirm('Do you want to play Rock, Paper Scissors?');
+  playRPS ? playGame() : console.log("Thank you for playing :)");
 
