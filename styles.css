@@ -12,8 +12,7 @@ body{
     background-color: rgb(250, 229, 201);
     font-family: 'Open Sans', sans-serif;
     font-family: 'Outfit', sans-serif;
-    font-weight: 900;
-    font-size: 24px;
+    
 
 }
 
@@ -22,14 +21,16 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    
 }
 
 #content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    flex-direction: column;
-    gap: 2rem;
+    
 }
 
 #items {
@@ -37,17 +38,44 @@ body{
     justify-content: center;
     align-items: center;
     gap: 4rem;
+    margin-top: 5rem;
 }
 
+.centered h1{
+    font-weight: 900;
+    font-size: 24px;
+}
 /* #paper, #rock, #scissors{
     display: flex;
     justify-content: center;
     align-items: center;
 } */
 
-#paper img, #rock img, #scissors img{
-    border: 1px black solid;
+button{
+    /* border: 1px solid black; */
+    border-radius: 1rem;
+    background-color: rgb(253, 216, 168);
+    width: 10rem;
+    height: 10rem;
+}
 
+#paper img, #rock img, #scissors img{
+    
     width: 8rem;
     height: 8rem;
+    
+}
+
+#paper p, #rock p, #scissors p{
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+#result p{
+    /* font-family: 'Open Sans', sans-serif;
+    font-family: 'Outfit', sans-serif; */
+    font-size: 18px;
+    font-weight: 900;
 }

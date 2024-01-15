@@ -12,24 +12,40 @@
 </head>
 <body>
     <div id="container">
-        <div id="content">
             <div id="heading">
                 <h1 class="centered">Welcome to Rock Paper Scissors!</h1>
             </div>
-            <div id="items">
-                <div id="rock">
-                    <img src="images/stone.png">
-                </div>
-                <div id="paper">
-                    <img src="images/paper.png">
-                </div>
-                <div id="scissors">
-                    <img src="images/scissor.png">
-                </div>
+            <div id="result">
+                <p>This is the result</p>
             </div>
-        </div>
+            <div id="items">
+                <button id="rock">
+                    <img src="images/stone.png">
+                    <p>Rock</p>
+                </button>
+                <button id="paper">
+                    <img src="images/paper.png">
+                    <p>Paper</p>
+                </button>
+                <button id="scissors">
+                    <img src="images/scissor.png">
+                    <p>Scissors</p>
+                </button>
+            </div>
     </div>
 </body>
+<script>
+
+    
+    let items = document.querySelectorAll('#items button');
+    items.forEach(function(item){
+        item.addEventListener('click', function(){
+            let result = document.querySelector('#result');
+            result.textContent = item.id;
+        });
+    });
+    
+</script>
 </html>
 
 <!-- /* <a href="https://www.flaticon.com/free-icons/scissors" title="scissors icons">Scissors icons created by Gulraiz - Flaticon</a> */
