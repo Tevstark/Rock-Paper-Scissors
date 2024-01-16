@@ -87,6 +87,7 @@ function gameScore(){
     let userConsent = userChoiceInput.value.toLowerCase();
     if(userConsent === 'yes'){
       alert('Pick Rock Paper or Scissors');
+      gameScore();
       playGame(userChoice);
     } else if(userConsent === 'no'){
       alert('Okay! See you next time.');
@@ -95,6 +96,13 @@ function gameScore(){
       userChoiceInput.value = '';
     };
   });
+
+  function resetForm(){
+    let inputs = document.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++){
+      inputs[i].value = '';
+    }
+  };
 
   playRPS ? getPlayerChoice() : console.log("Thank you for playing :)");
 
