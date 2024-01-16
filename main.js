@@ -12,7 +12,7 @@ function getPlayerChoice() {
                     userChoice === 'scissors'
                   ) {
                     console.log(userChoice)
-                    return userChoice
+                    playGame(userChoice);
                 } else {
                     alert("Please enter a valid prompt");
                     return getPlayerChoice();
@@ -31,38 +31,37 @@ function getPlayerChoice() {
   }
   
   function getGameResult(userChoice, computer) {
+    let result = document.querySelector('#result');
+    let playerScore = document.querySelector('#player-score');
+    let compScore = document.querySelector('#comp-score');
+    let scoreBoard = [playerScore, compScore];
     if (userChoice === computer) {
-      return "Game Tie";
+      result.textContent = "Game Tie";
     } else if (
       (userChoice === "rock" && computer === "scissors") ||
       (userChoice === "scissors" && computer === "paper") ||
       (userChoice === "paper" && computer === "rock")
     ) {
-        let result = document.querySelector('#result');
         result.textContent = `PlayerOne: ${userChoice}, computer: ${computer}, \nPlayer wins!`;
+        scoreBoard[0].textContent = parseInt(scoreBoard[0].textContent) + 1;
 
     } else {
-      return `PlayerOne: ${userChoice}, computer: ${computer}, \nComputer wins!`;
+      result.textContent = `PlayerOne: ${userChoice}, computer: ${computer}, \nComputer wins!`;
+      scoreBoard[1].textContent = parseInt(scoreBoard[1].textContent) + 1;
     }
   }
   
-  function playGame() {
+  function playGame(userChoice) {
     if (playGame) {
-      let playerOne = getPlayerChoice();
-      if (playerOne) {
-        let computer = getComputerChoice();
-        let result = getGameResult(userChoice, computer);
-        alert(result);
+        let computerChoice = getComputerChoice();
+        let getResult = getGameResult(userChoice, computerChoice);
         let playAgain = confirm('Play Again?');
         playAgain ? location.reload() : alert("Thank you for playing :)");
       }
-    } else {
-      alert("Maybe next time.");
-    }
   }
 
 function gameScore(){
-    let playerScore = document.createElement('int');
+    let playerScore = document.createElement('p');
     let compScore = document.createElement('p');
     playerScore.setAttribute('id', 'player-score')
     compScore.setAttribute('id', 'comp-score')
@@ -71,11 +70,31 @@ function gameScore(){
     scoreBoard.push(playerScore);
     scoreBoard[1] = document.createTextNode(" Computer: ");
     scoreBoard.push(compScore);
-    scoreBoard.appendChild(playerScore);
-    scoreBoard.appendChild(compScore);
-    
+    document.querySelector('#score').innerHTML = '';
+    scoreBoard.forEach(function(score){
+      document.querySelector('#score').appendChild(score);
+    });
+    playerScore.textContent += 0;
+    compScore.textContent += 0;
+
 };
   
-  let playRPS = confirm('Do you want to play Rock, Paper Scissors?');
-  playRPS ? playGame() : console.log("Thank you for playing :)");
+  // let playRPS = confirm('Do you want to play Rock, Paper Scissors?');
+  let playRPS = document.querySelector('#choice-form');
+  let userChoiceInput = document.querySelector('#user-choice');
+  playRPS.addEventListener('submit', function(event) {
+    event.preventDefault();
+    let userConsent = userChoiceInput.value.toLowerCase();
+    if(userConsent === 'yes'){
+      alert('Pick Rock Paper or Scissors');
+      playGame(userChoice);
+    } else if(userConsent === 'no'){
+      alert('Okay! See you next time.');
+    } else{
+      alert("Please enter a valid prompt");
+      userChoiceInput.value = '';
+    };
+  });
+
+  playRPS ? getPlayerChoice() : console.log("Thank you for playing :)");
 

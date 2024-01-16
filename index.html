@@ -15,8 +15,17 @@
             <div id="heading">
                 <h1 class="centered">Welcome to Rock Paper Scissors!</h1>
             </div>
+            <form id="choice-form">
+                <label for="user-choice">Do you want to play Rock, Paper, Scissors? (yes/no)</label><br>
+                <input type="text" id="user-choice" name="user-choice" autocomplete = "off"><br>
+                <input type="submit" value="Submit">
+            </form>
             <div id="result">
-                <p></p>
+                <!-- <p>Results go here: </p> -->
+            </div>
+            <div id="score">
+                <p id="player-score">Player: </p>
+                <p id="comp-score">Computer: </p>
             </div>
             <div id="items">
                 <button id="rock">

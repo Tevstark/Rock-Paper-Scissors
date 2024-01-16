@@ -79,3 +79,28 @@ button{
     font-size: 18px;
     font-weight: 900;
 }
+
+#result {
+    width: 20%;
+    height: 10%;
+    background-color: rgb(255, 157, 38);
+    color: black;
+}
+
+/* #user-choice {
+    border: 1px solid black;
+    color: brown;
+} */
+
+input[type=text]{
+    background-color: black;
+    padding: 20px;
+    color: white;
+}
+
+input[type=submit]{
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
